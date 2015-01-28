@@ -20,7 +20,7 @@ public class ControladorXogo {
     private void controladorRochas(float delta){
         for (ElementoMobil rocha : meuMundo.getRochas()){
             rocha.update(delta);
-            if (rocha.getPosicion().x < -Mundo.TAMANO_MUNDO_ANCHO){
+            if (rocha.getPosicion().x < -Mundo.TAMANO_ROCA.x){
                 meuMundo.getRochas().add(rocha);
             }
         }
