@@ -40,31 +40,31 @@ public final class Mundo {
 
 		coches.add(new ElementoMobil(new Vector2(0, 345), TAMANO_AUTOBUSES
 				.cpy(), 50, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
-		coches.add(new ElementoMobil(new Vector2(70, 345), TAMANO_COCHES.cpy(),
-				50, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
+		//coches.add(new ElementoMobil(new Vector2(70, 345), TAMANO_COCHES.cpy(),
+		//		50, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 		coches.add(new ElementoMobil(new Vector2(95, 345), TAMANO_COCHES.cpy(),
 				50, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 		coches.add(new ElementoMobil(new Vector2(115, 345),
 				TAMANO_COCHES.cpy(), 50, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
-		coches.add(new ElementoMobil(new Vector2(140, 345), TAMANO_AUTOBUSES
-				.cpy(), 50, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
+		//coches.add(new ElementoMobil(new Vector2(140, 345), TAMANO_AUTOBUSES
+		//		.cpy(), 50, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
 		coches.add(new ElementoMobil(new Vector2(210, 345), TAMANO_AUTOBUSES
 				.cpy(), 50, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
 		coches.add(new ElementoMobil(new Vector2(240, 345),
 				TAMANO_COCHES.cpy(), 50, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
-		coches.add(new ElementoMobil(new Vector2(278, 345),
-				TAMANO_COCHES.cpy(), 50, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
+		//coches.add(new ElementoMobil(new Vector2(278, 345),
+		//		TAMANO_COCHES.cpy(), 50, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 
 		coches.add(new ElementoMobil(new Vector2(40, 380), TAMANO_COCHES.cpy(),
 				35, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 		coches.add(new ElementoMobil(new Vector2(70, 380), TAMANO_COCHES.cpy(),
 				35, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
-		coches.add(new ElementoMobil(new Vector2(105, 380),
-				TAMANO_COCHES.cpy(), 35, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
+		//coches.add(new ElementoMobil(new Vector2(105, 380),
+		//		TAMANO_COCHES.cpy(), 35, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 		coches.add(new ElementoMobil(new Vector2(150, 380), TAMANO_AUTOBUSES
 				.cpy(), 35, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
-		coches.add(new ElementoMobil(new Vector2(180, 380), TAMANO_AUTOBUSES
-				.cpy(), 35, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
+		//coches.add(new ElementoMobil(new Vector2(180, 380), TAMANO_AUTOBUSES
+		//		.cpy(), 35, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
 		coches.add(new ElementoMobil(new Vector2(220, 380),
 				TAMANO_COCHES.cpy(), 35, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 		coches.add(new ElementoMobil(new Vector2(265, 380), TAMANO_AUTOBUSES
@@ -74,31 +74,31 @@ public final class Mundo {
 
 		coches.add(new ElementoMobil(new Vector2(0, 400), TAMANO_AUTOBUSES
 				.cpy(), -45, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
-		coches.add(new ElementoMobil(new Vector2(30, 400), TAMANO_COCHES.cpy(),
-				-45, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
+		//coches.add(new ElementoMobil(new Vector2(30, 400), TAMANO_COCHES.cpy(),
+		//		-45, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 		coches.add(new ElementoMobil(new Vector2(70, 400), TAMANO_COCHES.cpy(),
 				-45, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
-		coches.add(new ElementoMobil(new Vector2(95, 400), TAMANO_COCHES.cpy(),
-				-45, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
+		//coches.add(new ElementoMobil(new Vector2(95, 400), TAMANO_COCHES.cpy(),
+		//		-45, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 		coches.add(new ElementoMobil(new Vector2(115, 400),
 				TAMANO_COCHES.cpy(), -45, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
-		coches.add(new ElementoMobil(new Vector2(140, 400), TAMANO_AUTOBUSES
-				.cpy(), -45, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
-		coches.add(new ElementoMobil(new Vector2(210, 400), TAMANO_AUTOBUSES
-				.cpy(), -45, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
+		//coches.add(new ElementoMobil(new Vector2(140, 400), TAMANO_AUTOBUSES
+		//		.cpy(), -45, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
+		//coches.add(new ElementoMobil(new Vector2(210, 400), TAMANO_AUTOBUSES
+		//		.cpy(), -45, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
 		coches.add(new ElementoMobil(new Vector2(240, 400),
 				TAMANO_COCHES.cpy(), -45, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 		coches.add(new ElementoMobil(new Vector2(278, 400),
 				TAMANO_COCHES.cpy(), -45, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 
-		coches.add(new ElementoMobil(new Vector2(0, 365), TAMANO_COCHES.cpy(),
-				-65, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
+		//coches.add(new ElementoMobil(new Vector2(0, 365), TAMANO_COCHES.cpy(),
+		//		-65, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 		coches.add(new ElementoMobil(new Vector2(70, 365), TAMANO_AUTOBUSES
 				.cpy(), -65, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
 		coches.add(new ElementoMobil(new Vector2(115, 365),
 				TAMANO_COCHES.cpy(), -65, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
-		coches.add(new ElementoMobil(new Vector2(140, 365), TAMANO_AUTOBUSES
-				.cpy(), -65, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
+		//coches.add(new ElementoMobil(new Vector2(140, 365), TAMANO_AUTOBUSES
+		//		.cpy(), -65, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
 		coches.add(new ElementoMobil(new Vector2(240, 365),
 				TAMANO_COCHES.cpy(), -65, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 		coches.add(new ElementoMobil(new Vector2(278, 365), TAMANO_AUTOBUSES
@@ -107,10 +107,10 @@ public final class Mundo {
 		// //
 		coches.add(new ElementoMobil(new Vector2(0, 365), TAMANO_COCHES.cpy(),
 				-65, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
-		coches.add(new ElementoMobil(new Vector2(70, 365), TAMANO_AUTOBUSES
-				.cpy(), -65, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
-		coches.add(new ElementoMobil(new Vector2(115, 365),
-				TAMANO_COCHES.cpy(), -65, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
+		//coches.add(new ElementoMobil(new Vector2(70, 365), TAMANO_AUTOBUSES
+		//		.cpy(), -65, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
+		//coches.add(new ElementoMobil(new Vector2(115, 365),
+		//		TAMANO_COCHES.cpy(), -65, ElementoMobil.TIPOS_ELEMENTOS.COCHE));
 		coches.add(new ElementoMobil(new Vector2(140, 365), TAMANO_AUTOBUSES
 				.cpy(), -65, ElementoMobil.TIPOS_ELEMENTOS.AUTOBUS));
 		coches.add(new ElementoMobil(new Vector2(240, 365),

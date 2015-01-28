@@ -60,6 +60,30 @@ public class RendererXogo implements InputProcessor {
         Gdx.input.setInputProcessor(this);
 	}
 
+    private void debuxarCoches(){
+        Texture textura;
+        for (ElementoMobil coche: meuMundo.getCoches()){
+            switch (coche.getTipo()){
+                case COCHE:
+                    textura = AssetsXogo.textureCoche;
+                    break;
+                default:
+                    textura = AssetsXogo.textureAutobus;
+                    break;
+            }
+            if (coche.getVelocidade()<0){//velocicdad negativa, para la izquierda
+                spriteBatch.draw(textura,
+                        coche.getPosicion().x + coche.getTamano().x,
+                        coche.getPosicion().y , -coche.getTamano().x, //hacia o outro sentido
+                        coche.getTamano().y);
+            }else {//velocidad positiva, para la derecha
+                spriteBatch.draw(textura, coche.getPosicion().x,
+                        coche.getPosicion().y, coche.getTamano().x,
+                        coche.getTamano().y);
+            }
+        }
+    }
+
     private void debuxarAlien(){
         spriteBatch.draw(AssetsXogo.textureAlien, alien.getPosicion().x,
                 alien.getPosicion().y, alien.getTamano().x,
@@ -104,8 +128,12 @@ public class RendererXogo implements InputProcessor {
 		//spriteBatch.draw(AssetsXogo.textureAlien, temporal.x,temporal.y,15,15);
 
         debuxarFondo();
+
         debuxarNave();
         debuxarAlien();
+        debuxarRochas();
+        debuxarTroncos();
+        debuxarCoches();
 
        // spriteBatch.setColor(Color.YELLOW);
         //spriteBatch.draw(AssetsXogo.textureAlien,100,100,15,15);
@@ -125,15 +153,22 @@ public class RendererXogo implements InputProcessor {
         if (debugger){
             debugger();
         }
-
 	}
 
     private void debugger() {
+        //shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        //shapeRenderer.setColor(Color.BLUE);
+        //shapeRenderer.rect(100,100,15,15);
+        //shapeRenderer.setColor(Color.CYAN);
+        //shapeRenderer.rect(200,100,15,15);
+        //shapeRenderer.end();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.rect(100,100,15,15);
-        shapeRenderer.setColor(Color.CYAN);
-        shapeRenderer.rect(200,100,15,15);
+        for(ElementoMobil coche : meuMundo.getCoches()){
+            shapeRenderer.rect(coche.getPosicion().x,
+                    coche.getPosicion().y,
+                    coche.getTamano().x, coche.getTamano().y);
+        }
         shapeRenderer.end();
 
     }
@@ -150,7 +185,7 @@ public class RendererXogo implements InputProcessor {
 		Gdx.input.setInputProcessor(null);
         spriteBatch.dispose();
         AssetsXogo.liberarTexturas();
-        bitmapFont.dispose();
+        //bitmapFont.dispose();
 	}
 
     @Override

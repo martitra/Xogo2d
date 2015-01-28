@@ -1,6 +1,7 @@
 package com.xogos2d.pantallas;
 
 import com.badlogic.gdx.Screen;
+import com.xogos2d.controlador.ControladorXogo;
 import com.xogos2d.dam.AssetsXogo;
 import com.xogos2d.dam.MeuXogoGame;
 import com.xogos2d.dam.RendererXogo;
@@ -16,11 +17,14 @@ public class PantallaXogo implements Screen{
 	private MeuXogoGame meuXogoGame;
     private Mundo meuMundo;
 	private RendererXogo rendererXogo;
+    private ControladorXogo controladorXogo;
 	
 	public PantallaXogo(MeuXogoGame meuXogoGame){
 		this.meuXogoGame = meuXogoGame;
         meuMundo = new Mundo();
-		rendererXogo = new RendererXogo(meuMundo);
+        controladorXogo = new ControladorXogo(meuMundo);
+        rendererXogo = new RendererXogo(meuMundo);
+
 	}
 
 	@Override
@@ -33,6 +37,7 @@ public class PantallaXogo implements Screen{
 	public void render(float delta) {
 		// TODO Auto-generated method stub
 		rendererXogo.render(delta);
+        controladorXogo.update(delta);
 		
 	}
 
