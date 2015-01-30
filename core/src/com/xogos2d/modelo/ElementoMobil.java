@@ -26,6 +26,7 @@ public class ElementoMobil extends Personaxe {
     @Override
     public void update(float delta){
         posicion.add((velocidade*delta),0);//solo cambiamos la posicion x porque se mueve en horizontal
+        //ponemos delta para así que sea independiente de tamaño de dispositivo
     }
 
 

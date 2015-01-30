@@ -123,7 +123,7 @@ public final class Mundo {
 		rochas.add(new ElementoMobil(new Vector2(0, 40), TAMANO_ROCA.cpy(), 40,
 				ElementoMobil.TIPOS_ELEMENTOS.ROCA));
 		rochas.add(new ElementoMobil(new Vector2(0, 100), TAMANO_ROCA.cpy(),
-				60, ElementoMobil.TIPOS_ELEMENTOS.ROCA));
+				-60, ElementoMobil.TIPOS_ELEMENTOS.ROCA));
 		//
 		troncos = new Array<ElementoMobil>();
 		troncos.add(new ElementoMobil(new Vector2(100, 220), TAMANO_TRONCO
