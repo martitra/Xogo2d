@@ -60,10 +60,10 @@ public class RendererXogo implements InputProcessor {
         Gdx.input.setInputProcessor(this);
 	}
 
-    private void debuxarCoches(){
+    private void debuxarCoches() {
         Texture textura;
-        for (ElementoMobil coche: meuMundo.getCoches()){
-            switch (coche.getTipo()){
+        for (ElementoMobil coche : meuMundo.getCoches()) {
+            switch (coche.getTipo()) {
                 case COCHE:
                     textura = AssetsXogo.textureCoche;
                     break;
@@ -71,12 +71,12 @@ public class RendererXogo implements InputProcessor {
                     textura = AssetsXogo.textureAutobus;
                     break;
             }
-            if (coche.getVelocidade()<0){//velocicdad negativa, para la izquierda
+            if (coche.getVelocidade() < 0) {//velocicdad negativa, para la izquierda
                 spriteBatch.draw(textura,
                         coche.getPosicion().x + coche.getTamano().x,
-                        coche.getPosicion().y , -coche.getTamano().x, //hacia o outro sentido
+                        coche.getPosicion().y, -coche.getTamano().x, //hacia o outro sentido
                         coche.getTamano().y);
-            }else {//velocidad positiva, para la derecha
+            } else {//velocidad positiva, para la derecha
                 spriteBatch.draw(textura, coche.getPosicion().x,
                         coche.getPosicion().y, coche.getTamano().x,
                         coche.getTamano().y);
