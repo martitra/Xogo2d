@@ -1,5 +1,8 @@
 package com.xogos2d.pantallas;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.xogos2d.controlador.ControladorXogo;
 import com.xogos2d.dam.AssetsXogo;
@@ -8,7 +11,7 @@ import com.xogos2d.dam.RendererXogo;
 import com.xogos2d.dam.Utiles;
 import com.xogos2d.modelo.Mundo;
 
-public class PantallaXogo implements Screen{
+public class PantallaXogo implements Screen, InputProcessor{
 	
 	private boolean pause;
 	private boolean finXogo;
@@ -30,7 +33,9 @@ public class PantallaXogo implements Screen{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		Utiles.imprimirLog("PantallaXogo", "SHOW", "Test");
+		//Utiles.imprimirLog("PantallaXogo", "SHOW", "Test");
+        //indicamos a clase que inmplementa o interface InputProcessor
+        Gdx.input.setInputProcessor(this);
 	}
 
 	@Override
@@ -51,28 +56,102 @@ public class PantallaXogo implements Screen{
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		Utiles.imprimirLog("PantallaXogo", "PAUSE", "Test");
+		//Utiles.imprimirLog("PantallaXogo", "PAUSE", "Test");
+        Gdx.input.setInputProcessor(null);
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		Utiles.imprimirLog("PantallaXogo", "RESUME", "Test");
+		//Utiles.imprimirLog("PantallaXogo", "RESUME", "Test");
+        Gdx.input.setInputProcessor(this);
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		Utiles.imprimirLog("PantallaXogo", "HIDE", "Test");
+		//Utiles.imprimirLog("PantallaXogo", "HIDE", "Test");
+        Gdx.input.setInputProcessor(null);
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		rendererXogo.dispose();
 		//Utiles.imprimirLog("PantallaXogo", "DISPOSE", "Test");
-		
+        rendererXogo.dispose();
+        Gdx.input.setInputProcessor(null);
 	}
+
+    @Override
+    public boolean keyDown(int keycode) {
+
+        // Liberar as teclas para que si arrastramos o dedo
+        // ou outro control sen soltar o anterior, non xunte o efecto
+
+        controladorXogo.liberarTecla(ControladorXogo.Keys.ABAIXO);
+        controladorXogo.liberarTecla(ControladorXogo.Keys.ARRIBA);
+        controladorXogo.liberarTecla(ControladorXogo.Keys.DEREITA);
+        controladorXogo.liberarTecla(ControladorXogo.Keys.ESQUERDA);
+
+        switch (keycode){
+            case Input.Keys.UP:
+                controladorXogo.pulsarTecla(ControladorXogo.Keys.ARRIBA);
+                break;
+            case Input.Keys.DOWN:
+                controladorXogo.pulsarTecla(ControladorXogo.Keys.ABAIXO);
+                break;
+            case Input.Keys.RIGHT:
+                controladorXogo.pulsarTecla(ControladorXogo.Keys.DEREITA);
+                break;
+            case Input.Keys.LEFT:
+                controladorXogo.pulsarTecla(ControladorXogo.Keys.ESQUERDA);
+                break;
+        }
+
+
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+
+        controladorXogo.liberarTecla(ControladorXogo.Keys.ABAIXO);
+        controladorXogo.liberarTecla(ControladorXogo.Keys.ARRIBA);
+        controladorXogo.liberarTecla(ControladorXogo.Keys.DEREITA);
+        controladorXogo.liberarTecla(ControladorXogo.Keys.ESQUERDA);
+
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
+    }
 
 	
 }

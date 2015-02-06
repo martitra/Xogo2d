@@ -4,8 +4,11 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.xogos2d.dam.Utiles;
 import com.xogos2d.modelo.Alien;
+import com.xogos2d.modelo.Controis;
 import com.xogos2d.modelo.ElementoMobil;
 import com.xogos2d.modelo.Mundo;
+
+import java.util.HashMap;
 
 /**
  * Created by dam201 on 28/01/2015 14:08 14:08.
@@ -14,6 +17,49 @@ public class ControladorXogo {
     private Mundo meuMundo;
     private Alien alien;
 
+    public enum Keys {
+        ESQUERDA, DEREITA, ARRIBA, ABAIXO
+    }
+
+    HashMap<Keys,Boolean> keys =
+            new HashMap<ControladorXogo.Keys, Boolean>();
+    {
+        keys.put(Keys.ESQUERDA, false);
+        keys.put(Keys.DEREITA, false);
+        keys.put(Keys.ARRIBA, false);
+        keys.put(Keys.ABAIXO, false);
+    }
+
+    public void pulsarTecla(Keys tecla) {
+        keys.put(tecla, true);
+    }
+
+    public void liberarTecla(Keys tecla) {
+        keys.put(tecla, false);
+    }
+
+
+    private void procesarEntradas(){
+        if (keys.get(Keys.DEREITA)) {
+            alien.setVelocidadeX(alien.velocidade_max);
+        }
+        if (keys.get(Keys.ESQUERDA)){
+            alien.setVelocidadeX(-alien.velocidade_max);
+        }
+        if(!(keys.get(Keys.ESQUERDA)) && !(keys.get(Keys.DEREITA))) {
+            alien.setVelocidadeX(0);
+        }
+
+        if (keys.get(Keys.ARRIBA)) {
+            alien.setVelocidadeY(alien.velocidade_max);
+        }
+        if (keys.get(Keys.ABAIXO)){
+            alien.setVelocidadeY(-alien.velocidade_max);
+        }
+        if(!(keys.get(Keys.ARRIBA)) && !(keys.get(Keys.ABAIXO))) {
+            alien.setVelocidadeY(0);
+        }
+    }
 
     public ControladorXogo(Mundo meuMundo) {
         this.meuMundo = meuMundo;
@@ -148,11 +194,42 @@ public class ControladorXogo {
         meuMundo.getNave().update(delta);
     }
 
+    private void controladorAlien(float delta){
+
+        alien.update(delta);
+
+        // Impedir que se mova fora dos límites da pantalla
+        // para que no se vaya infinitamente hacia la izquierda o derecha
+        if (alien.getPosicion().x <=0) {
+            alien.setPosicion(0, alien.getPosicion().y);
+        } else {
+            if (alien.getPosicion().x >= Mundo.TAMANO_MUNDO_ANCHO
+                    - alien.getTamano().x){
+                alien.setPosicion(Mundo.TAMANO_MUNDO_ANCHO
+                        - alien.getTamano().x, alien.getPosicion().y);
+            }
+        }
+
+        //para que no se vaya infinitamente hacia arriba o abajo
+        if(alien.getPosicion().y <= Controis.FONDO_NEGRO.height){
+            alien.setPosicion(alien.getPosicion().x,
+                    Controis.FONDO_NEGRO.height);
+        }else{
+            if(alien.getPosicion().y >= Mundo.TAMANO_MUNDO_ALTO
+                    -alien.getTamano().y){
+                alien.setPosicion(alien.getPosicion().x,
+                        Mundo.TAMANO_MUNDO_ALTO - alien.getTamano().y);
+            }
+        }
+        // ------
+    }
+
     public void update(float delta){
         controladorRochas(delta);
         controladorTroncos(delta);
         controladorCoches(delta);
         controladorNave(delta);
-
+        controladorAlien(delta);
+        procesarEntradas();
     }
 }

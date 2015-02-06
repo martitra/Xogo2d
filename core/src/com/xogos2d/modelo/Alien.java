@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 /**
- * Created by dam201 on 22/01/2015.
+ * Created by dam201 on 22/01/2015 13:12.
  */
 public class Alien extends Personaxe {
 

@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.utils.StringBuilder;
 import com.xogos2d.modelo.Alien;
+import com.xogos2d.modelo.Controis;
 import com.xogos2d.modelo.ElementoMobil;
 import com.xogos2d.modelo.Mundo;
 import com.xogos2d.modelo.Nave;
@@ -60,28 +61,36 @@ public class RendererXogo implements InputProcessor {
         Gdx.input.setInputProcessor(this);
 	}
 
-    private void debuxarCoches() {
-        Texture textura;
-        for (ElementoMobil coche : meuMundo.getCoches()) {
-            switch (coche.getTipo()) {
-                case COCHE:
-                    textura = AssetsXogo.textureCoche;
-                    break;
-                default:
-                    textura = AssetsXogo.textureAutobus;
-                    break;
-            }
-            if (coche.getVelocidade() < 0) {//velocicdad negativa, para la izquierda
-                spriteBatch.draw(textura,
-                        coche.getPosicion().x + coche.getTamano().x,
-                        coche.getPosicion().y, -coche.getTamano().x, //hacia o outro sentido
-                        coche.getTamano().y);
-            } else {//velocidad positiva, para la derecha
-                spriteBatch.draw(textura, coche.getPosicion().x,
-                        coche.getPosicion().y, coche.getTamano().x,
-                        coche.getTamano().y);
-            }
-        }
+    private void debuxarControis(){
+
+        // fondo negro
+        spriteBatch.draw(AssetsXogo.texturePuntoNegro,
+                Controis.FONDO_NEGRO.x,
+                Controis.FONDO_NEGRO.y,
+                Controis.FONDO_NEGRO.width,
+                Controis.FONDO_NEGRO.height);
+
+        //Control direccion
+        spriteBatch.draw(AssetsXogo.textureControisFrechas,
+                Controis.CONTROL.x,
+                Controis.CONTROL.y,
+                Controis.CONTROL.width,
+                Controis.CONTROL.height);
+
+        //
+        spriteBatch.draw(AssetsXogo.texturePausa,
+                Controis.CONTROL_PAUSE.x,
+                Controis.CONTROL_PAUSE.y,
+                Controis.CONTROL_PAUSE.width,
+                Controis.CONTROL_PAUSE.height);
+
+        //
+        spriteBatch.draw(AssetsXogo.textureSair,
+                Controis.CONTROL_SAIR.x,
+                Controis.CONTROL_SAIR.y,
+                Controis.CONTROL_SAIR.width,
+                Controis.CONTROL_SAIR.height);
+
     }
 
     private void debuxarAlien(){
@@ -116,6 +125,30 @@ public class RendererXogo implements InputProcessor {
         }
     }
 
+    private void debuxarCoches() {
+        Texture textura;
+        for (ElementoMobil coche : meuMundo.getCoches()) {
+            switch (coche.getTipo()) {
+                case COCHE:
+                    textura = AssetsXogo.textureCoche;
+                    break;
+                default:
+                    textura = AssetsXogo.textureAutobus;
+                    break;
+            }
+            if (coche.getVelocidade() < 0) {//velocicdad negativa, para la izquierda
+                spriteBatch.draw(textura,
+                        coche.getPosicion().x + coche.getTamano().x,
+                        coche.getPosicion().y, -coche.getTamano().x, //hacia o outro sentido
+                        coche.getTamano().y);
+            } else {//velocidad positiva, para la derecha
+                spriteBatch.draw(textura, coche.getPosicion().x,
+                        coche.getPosicion().y, coche.getTamano().x,
+                        coche.getTamano().y);
+            }
+        }
+    }
+
     /**
      * tempo que pasa entre un frame e o siguiente
      * @param delta
@@ -128,12 +161,14 @@ public class RendererXogo implements InputProcessor {
 		//spriteBatch.draw(AssetsXogo.textureAlien, temporal.x,temporal.y,15,15);
 
         debuxarFondo();
+        debuxarControis();
 
         debuxarNave();
         debuxarAlien();
         debuxarRochas();
         debuxarTroncos();
         debuxarCoches();
+
 
        // spriteBatch.setColor(Color.YELLOW);
         //spriteBatch.draw(AssetsXogo.textureAlien,100,100,15,15);
