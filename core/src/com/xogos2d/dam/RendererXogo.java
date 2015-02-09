@@ -149,6 +149,23 @@ public class RendererXogo implements InputProcessor {
         }
     }
 
+    private void debuxarVidas() {
+        Texture textura;
+        int posX = Controis.POSVIDAS;
+        for (Alien.TIPOS_VIDA vida : meuMundo.getAlien().getNumVidas()){
+            if (vida == Alien.TIPOS_VIDA.MUERTO){
+                textura = AssetsXogo.textureAlienDead;
+            } else if (vida == Alien.TIPOS_VIDA.SALVADO){
+                textura = AssetsXogo.textureAlienRescue;
+            } else{
+                textura = AssetsXogo.textureAlien;
+            }
+            spriteBatch.draw(textura, posX, 0, 10, 10);
+            posX += 12;
+        }
+    }
+
+
     /**
      * tempo que pasa entre un frame e o siguiente
      * @param delta
@@ -161,15 +178,14 @@ public class RendererXogo implements InputProcessor {
 		//spriteBatch.draw(AssetsXogo.textureAlien, temporal.x,temporal.y,15,15);
 
         debuxarFondo();
-        debuxarControis();
 
         debuxarNave();
-        debuxarAlien();
         debuxarRochas();
         debuxarTroncos();
         debuxarCoches();
-
-
+        debuxarAlien();//poñer o alien aquí para que se superpoña por encima do mundo
+        debuxarControis();
+        debuxarVidas();
        // spriteBatch.setColor(Color.YELLOW);
         //spriteBatch.draw(AssetsXogo.textureAlien,100,100,15,15);
 

@@ -1,5 +1,6 @@
 package com.xogos2d.controlador;
 
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.xogos2d.dam.Utiles;
@@ -221,7 +222,63 @@ public class ControladorXogo {
                         Mundo.TAMANO_MUNDO_ALTO - alien.getTamano().y);
             }
         }
-        // ------
+
+        /*
+            Controlar que suba enriba dun elemento móvil
+            Rochas ou Troncos
+        */
+        alien.setVelocidade_montado(0);
+        for (ElementoMobil elem: meuMundo.getRochas()){
+            if (Intersector.overlaps(elem.getRectangulo(), alien.getRectangulo())){
+                alien.setVelocidade_montado(elem.getVelocidade());
+            }
+        }
+        for (ElementoMobil elem : meuMundo.getTroncos()){
+            if(Intersector.overlaps(elem.getRectangulo(), alien.getRectangulo())){
+                alien.setVelocidade_montado(elem.getVelocidade());
+            }
+        }
+
+        /*
+            Controla se o colle un coche
+        */
+        for (ElementoMobil elem : meuMundo.getCoches()){
+            if (Intersector.overlaps(elem.getRectangulo(), alien.getRectangulo())){
+                alien.setNumVidas(Alien.TIPOS_VIDA.MUERTO);
+                alien.inicializarAlien();
+            }
+        }
+
+        /*
+            Controla se cae a auga ou lava
+        */
+        if (alien.getVelocidade_montado() == 0){
+            boolean seguro = false;
+            // Si está nunha zona segura non miramos as perigosas
+            for (int i = 0;i < Mundo.ZONAS_SEGURAS.length;i++){
+                if (Intersector.overlaps(Mundo.ZONAS_SEGURAS[i],alien.getRectangulo())){
+                    seguro = true;
+                    break;
+                }
+            }
+            if (!seguro){
+                for (int i = 0;i < Mundo.ZONAS_PERIGOSAS.length;i++){
+                    if (Intersector.overlaps(Mundo.ZONAS_PERIGOSAS[i],alien.getRectangulo())){
+                        alien.setNumVidas(Alien.TIPOS_VIDA.MUERTO);
+                        alien.inicializarAlien();
+                    }
+                }
+            }
+
+        }
+
+        /*
+            Cando o alien chega a nave, sálvase e inicializamos
+        */
+        if (Intersector.overlaps(meuMundo.getNave().getRectangulo(), alien.getRectangulo())){
+            alien.setNumVidas(Alien.TIPOS_VIDA.SALVADO);
+            alien.inicializarAlien();
+        }
     }
 
     public void update(float delta){
