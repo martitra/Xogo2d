@@ -47,7 +47,9 @@ public class RendererXogo implements InputProcessor {
         this.meuMundo = mundo;
         alien = mundo.getAlien();
         nave = mundo.getNave();
-        AssetsXogo.cargarTexturas();
+        //
+
+        //
 		camara2d = new OrthographicCamera();
 		//grafico = new Texture(Gdx.files.internal("badlogic.jpg"));
 		spriteBatch = new SpriteBatch();
@@ -235,7 +237,7 @@ public class RendererXogo implements InputProcessor {
 	public void dispose(){
 		Gdx.input.setInputProcessor(null);
         spriteBatch.dispose();
-        AssetsXogo.liberarTexturas();
+        //AssetsXogo.liberarTexturas();
         //bitmapFont.dispose();
 	}
 

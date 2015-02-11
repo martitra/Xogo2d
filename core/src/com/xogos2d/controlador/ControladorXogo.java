@@ -3,6 +3,7 @@ package com.xogos2d.controlador;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.xogos2d.dam.Audio;
 import com.xogos2d.dam.Utiles;
 import com.xogos2d.modelo.Alien;
 import com.xogos2d.modelo.Controis;
@@ -245,6 +246,7 @@ public class ControladorXogo {
         for (ElementoMobil elem : meuMundo.getCoches()){
             if (Intersector.overlaps(elem.getRectangulo(), alien.getRectangulo())){
                 alien.setNumVidas(Alien.TIPOS_VIDA.MUERTO);
+                Audio.morte.play();// ponemos música porque murió
                 alien.inicializarAlien();
             }
         }
@@ -265,11 +267,11 @@ public class ControladorXogo {
                 for (int i = 0;i < Mundo.ZONAS_PERIGOSAS.length;i++){
                     if (Intersector.overlaps(Mundo.ZONAS_PERIGOSAS[i],alien.getRectangulo())){
                         alien.setNumVidas(Alien.TIPOS_VIDA.MUERTO);
+                        Audio.morte.play();// ponemos música porque murió
                         alien.inicializarAlien();
                     }
                 }
             }
-
         }
 
         /*
@@ -277,6 +279,7 @@ public class ControladorXogo {
         */
         if (Intersector.overlaps(meuMundo.getNave().getRectangulo(), alien.getRectangulo())){
             alien.setNumVidas(Alien.TIPOS_VIDA.SALVADO);
+            Audio.transporter_sfx.play();
             alien.inicializarAlien();
         }
     }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.xogos2d.controlador.ControladorXogo;
 import com.xogos2d.dam.AssetsXogo;
+import com.xogos2d.dam.Audio;
 import com.xogos2d.dam.MeuXogoGame;
 import com.xogos2d.dam.RendererXogo;
 import com.xogos2d.dam.Utiles;
@@ -27,8 +28,8 @@ public class PantallaXogo implements Screen, InputProcessor{
         meuMundo = new Mundo();
         controladorXogo = new ControladorXogo(meuMundo);
         rendererXogo = new RendererXogo(meuMundo);
-
-	}
+        Audio.playMusica(); // iniciar música de fondo
+    }
 
 	@Override
 	public void show() {
@@ -43,6 +44,15 @@ public class PantallaXogo implements Screen, InputProcessor{
 		// TODO Auto-generated method stub
 		rendererXogo.render(delta);
         controladorXogo.update(delta);
+
+        if (meuMundo.getAlien().getNumVidas().size >= 15) {
+            finXogo = true;
+
+        }
+
+        if (finXogo == true) {
+            // pasar control a outra pantalla
+        }
 		
 	}
 

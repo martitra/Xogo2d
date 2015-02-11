@@ -1,5 +1,120 @@
 package com.xogos2d.pantallas;
 
-public class PantallaPresentacion {
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
+import com.xogos2d.dam.Audio;
+import com.xogos2d.dam.MeuXogoGame;
+import com.xogos2d.modelo.Mundo;
 
+public class PantallaPresentacion implements Screen, InputProcessor{
+
+    private MeuXogoGame meuXogoGame;
+    private OrthographicCamera camara2d;
+    private SpriteBatch spriteBatch;
+    private static Texture fondo;
+
+    private Rectangle botons[] = {
+            new Rectangle(100, 268, 98, 32),
+            new Rectangle(100, 235, 98, 32),
+            new Rectangle(100, 200, 98, 32)
+    };
+
+    Vector3 temp;
+    Circle dedo;
+
+    public PantallaPresentacion(MeuXogoGame meuXogoGame){
+        this.meuXogoGame = meuXogoGame;
+        camara2d = new OrthographicCamera();
+        spriteBatch = new SpriteBatch();
+        fondo = new Texture(Gdx.files.internal("GRAFICOS/LIBGDX_itin1_pantallapresentacion.png"));
+        temp = new Vector3();
+        dedo = new Circle();
+
+        Audio.playMusica();
+
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
+    }
+
+    @Override
+    public void show() {
+
+    }
+
+    @Override
+    public void render(float delta) {
+        spriteBatch.begin();
+        spriteBatch.draw(fondo,0,0, Mundo.TAMANO_MUNDO_ANCHO,Mundo.TAMANO_MUNDO_ALTO);
+        spriteBatch.end();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
 }
