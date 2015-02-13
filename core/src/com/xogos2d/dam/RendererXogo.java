@@ -282,4 +282,8 @@ public class RendererXogo implements InputProcessor {
     public boolean scrolled(int amount) {
         return false;
     }
+
+    public OrthographicCamera getCamara2d() {
+        return camara2d;
+    }
 }

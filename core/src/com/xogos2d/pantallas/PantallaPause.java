@@ -45,6 +45,8 @@ public class PantallaPause implements Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        //se damos click en calquer punto da pantalla sale pantallapause
+        meuXogoGame.setScreen(pantallaXogo);
         return false;
     }
 
@@ -70,12 +72,14 @@ public class PantallaPause implements Screen, InputProcessor {
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void render(float delta) {
-
+        spriteBatch.begin();
+        spriteBatch.draw(fondo,0,0,Mundo.TAMANO_MUNDO_ANCHO,Mundo.TAMANO_MUNDO_ALTO);
+        spriteBatch.end();
     }
 
     @Override
@@ -88,21 +92,23 @@ public class PantallaPause implements Screen, InputProcessor {
 
     @Override
     public void pause() {
-
+        Gdx.input.setInputProcessor(null);
     }
 
     @Override
     public void resume() {
-
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void hide() {
-
+        dispose();
     }
 
     @Override
     public void dispose() {
-
+        Gdx.input.setInputProcessor(null);
+        spriteBatch.dispose();
+        fondo.dispose();
     }
 }

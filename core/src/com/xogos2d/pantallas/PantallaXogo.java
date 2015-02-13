@@ -4,12 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Vector3;
 import com.xogos2d.controlador.ControladorXogo;
 import com.xogos2d.dam.AssetsXogo;
 import com.xogos2d.dam.Audio;
 import com.xogos2d.dam.MeuXogoGame;
 import com.xogos2d.dam.RendererXogo;
 import com.xogos2d.dam.Utiles;
+import com.xogos2d.modelo.Controis;
 import com.xogos2d.modelo.Mundo;
 
 public class PantallaXogo implements Screen, InputProcessor{
@@ -17,6 +22,9 @@ public class PantallaXogo implements Screen, InputProcessor{
 	private boolean pause;
 	private boolean finXogo;
 	private boolean sair;//finalizar
+
+    private Vector3 temp;
+    private Circle dedo;
 	
 	private MeuXogoGame meuXogoGame;
     private Mundo meuMundo;
@@ -28,7 +36,10 @@ public class PantallaXogo implements Screen, InputProcessor{
         meuMundo = new Mundo();
         controladorXogo = new ControladorXogo(meuMundo);
         rendererXogo = new RendererXogo(meuMundo);
-        Audio.playMusica(); // iniciar música de fondo
+
+        temp = new Vector3();
+        dedo = new Circle();
+
     }
 
 	@Override
@@ -37,6 +48,9 @@ public class PantallaXogo implements Screen, InputProcessor{
 		//Utiles.imprimirLog("PantallaXogo", "SHOW", "Test");
         //indicamos a clase que inmplementa o interface InputProcessor
         Gdx.input.setInputProcessor(this);
+        Audio.playMusica(); // iniciar música de fondo
+        Audio.iniciarClaxon();
+
 	}
 
 	@Override
@@ -50,8 +64,13 @@ public class PantallaXogo implements Screen, InputProcessor{
 
         }
 
-        if (finXogo == true) {
-            // pasar control a outra pantalla
+        if (pause) {
+            meuXogoGame.setScreen(new PantallaPause(meuXogoGame,this));
+            return;
+        }
+
+        if (finXogo) {
+            meuXogoGame.setScreen(new PantallaMarcadores(meuXogoGame, this));
         }
 		
 	}
@@ -75,6 +94,9 @@ public class PantallaXogo implements Screen, InputProcessor{
 		// TODO Auto-generated method stub
 		//Utiles.imprimirLog("PantallaXogo", "RESUME", "Test");
         Gdx.input.setInputProcessor(this);
+        pause = false;
+        Audio.playMusica();
+        Audio.iniciarClaxon();
 	}
 
 	@Override
@@ -82,6 +104,11 @@ public class PantallaXogo implements Screen, InputProcessor{
 		// TODO Auto-generated method stub
 		//Utiles.imprimirLog("PantallaXogo", "HIDE", "Test");
         Gdx.input.setInputProcessor(null);
+        Audio.pararClaxon();
+        Audio.stopMusica();
+        pause = false;
+        if (finXogo || sair) dispose();
+
 	}
 
 	@Override
@@ -140,6 +167,31 @@ public class PantallaXogo implements Screen, InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        OrthographicCamera camara2d = rendererXogo.getCamara2d();
+        temp.set(screenX, screenY, 0);
+        camara2d.unproject(temp);
+        dedo.set(temp.x, temp.y, 2f);
+
+        // liberar as teclas
+        controladorXogo.liberarTecla(ControladorXogo.Keys.ABAIXO);
+        controladorXogo.liberarTecla(ControladorXogo.Keys.ARRIBA);
+        controladorXogo.liberarTecla(ControladorXogo.Keys.DEREITA);
+        controladorXogo.liberarTecla(ControladorXogo.Keys.ESQUERDA);
+        //
+
+        if(Intersector.overlaps(dedo, Controis.getRectanguloFrechaEsquerda())) {
+            controladorXogo.pulsarTecla(ControladorXogo.Keys.ESQUERDA);
+        } else if (Intersector.overlaps(dedo, Controis.getRectanguloFrechaAbaixo())) {
+            controladorXogo.pulsarTecla(ControladorXogo.Keys.ABAIXO);
+        } else if (Intersector.overlaps(dedo, Controis.getRectanguloFrechaArriba())) {
+            controladorXogo.pulsarTecla(ControladorXogo.Keys.ARRIBA);
+        } else if (Intersector.overlaps(dedo, Controis.getRectanguloFrechaDereita())) {
+            controladorXogo.pulsarTecla(ControladorXogo.Keys.DEREITA);
+        } else if (Intersector.overlaps(dedo, Controis.CONTROL_PAUSE)) {
+            pause = true;
+        } else if (Intersector.overlaps(dedo, Controis.CONTROL_SAIR)) {
+            sair = true;
+        }
         return false;
     }
 

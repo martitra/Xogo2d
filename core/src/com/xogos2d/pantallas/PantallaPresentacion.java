@@ -135,7 +135,7 @@ public class PantallaPresentacion implements Screen, InputProcessor{
     @Override
     public void dispose() {
         Gdx.input.setInputProcessor(null);
-        spriteBatch.dispose();
+        //spriteBatch.dispose();
         fondo.dispose();
     }
 }
