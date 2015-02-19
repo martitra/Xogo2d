@@ -50,6 +50,16 @@ public class Alien extends Personaxe {
         return num;
     }
 
+    public int getNumVidasMortas(){
+        int num = 0;
+        for(TIPOS_VIDA vida : numVidas){
+            if(vida == TIPOS_VIDA.MUERTO){
+                num++;
+            }
+        }
+        return num;
+    }
+
     public void inicializarAlien() {
         setPosicion(100, 20);
         setVelocidade_montado(0);
