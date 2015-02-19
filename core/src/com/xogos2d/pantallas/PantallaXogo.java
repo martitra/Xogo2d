@@ -71,6 +71,7 @@ public class PantallaXogo implements Screen, InputProcessor{
 
         if (finXogo) {
             meuXogoGame.setScreen(new PantallaMarcadores(meuXogoGame, this));
+            return;
         }
 		
 	}
@@ -215,5 +216,7 @@ public class PantallaXogo implements Screen, InputProcessor{
         return false;
     }
 
-	
+	public Mundo getMundo(){
+        return meuMundo;
+    }
 }
