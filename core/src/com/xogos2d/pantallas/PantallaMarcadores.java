@@ -2,6 +2,7 @@ package com.xogos2d.pantallas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -9,35 +10,69 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.xogos2d.dam.MeuXogo;
 import com.xogos2d.dam.MeuXogoGame;
 import com.xogos2d.modelo.Alien;
 import com.xogos2d.modelo.Mundo;
 
 public class PantallaMarcadores implements Screen, InputProcessor {
 
-    /* TODO Poner resultado de juego */
-
     private MeuXogoGame meuXogoGame;
     private PantallaXogo pantallaXogo;
     private OrthographicCamera camara2d;
     private SpriteBatch spriteBatch;
-    private Texture fondo;
+    private static Texture fondo;
     private BitmapFont bitMapFont;
-    private String vidasSalvadas;
+    private String vidasSalvadas = "Vidas Salvadas ";
     private String vidasMortas;
+    private Preferences preferences;
+    private Integer numVidasSalvadas = 0;
 
-    public PantallaMarcadores(MeuXogoGame meuXogoGame, PantallaXogo pantallaXogo){
-        this.meuXogoGame = meuXogoGame;
-        this.pantallaXogo = pantallaXogo;
+    public PantallaMarcadores(){
         bitMapFont = new BitmapFont();
-
         camara2d = new OrthographicCamera();
         spriteBatch = new SpriteBatch();
         fondo = new Texture(Gdx.files.internal("GRAFICOS/LIBGDX_itin1_pantallapause.jpg"));
-        Alien alien = pantallaXogo.getMundo().getAlien();
+        preferences = Gdx.app.getPreferences("marcadores");
+        //almacenadas, as gardadas en preferencias(numvidassalvadas)
+        numVidasSalvadas = preferences.getInteger("vidas_salvadas", 0);
+    }
 
-        vidasSalvadas = "Vidas Salvadas: "+String.valueOf(alien.getNumVidasSalvadas());
-        vidasMortas = "Vidas Mortas: "+String.valueOf(alien.getNumVidasMortas());
+    /*
+    Constructor a chamar desde pantalla Presentación
+     */
+    public PantallaMarcadores(MeuXogoGame meuXogoGame) {
+        this();
+        this.meuXogoGame = meuXogoGame;
+
+        vidasSalvadas = vidasSalvadas.concat(String.valueOf(numVidasSalvadas));
+        /*
+        si vimos de pantallaXogo
+        guardar a mellor punci&oacute;n e mostrar a tua puntuaci&oacute;n e as demais
+        senon, vimos de pantallaPresentacion
+        e solo mostrarmos a mellor puntuaci&oacute;n.
+        */
+    }
+
+    /*
+    Construcotr a chamar desde pantalla Xogo con finxogo
+     */
+    public PantallaMarcadores(MeuXogoGame meuXogoGame, PantallaXogo pantallaXogo){
+        this();
+        this.meuXogoGame = meuXogoGame;
+        this.pantallaXogo = pantallaXogo;
+
+        Alien alien = pantallaXogo.getMundo().getAlien();
+        Integer numvidasSalvadasXogo = alien.getNumVidasSalvadas();
+        if (numvidasSalvadasXogo > numVidasSalvadas){
+            numVidasSalvadas = numvidasSalvadasXogo;
+            preferences.putInteger("vidas_salvadas",numVidasSalvadas);
+            preferences.flush();//para actualizar
+            vidasSalvadas = vidasSalvadas.concat("Nuevo Record!! ");
+        }
+        vidasSalvadas = vidasSalvadas.concat(String.valueOf(numVidasSalvadas));
+        //vidasSalvadas = "Vidas Salvadas: "+String.valueOf(alien.getNumVidasSalvadas());
+        //vidasMortas = "Vidas Mortas: "+String.valueOf(alien.getNumVidasMortas());
     }
 
     @Override
@@ -97,8 +132,8 @@ public class PantallaMarcadores implements Screen, InputProcessor {
         spriteBatch.draw(fondo,0,0, Mundo.TAMANO_MUNDO_ANCHO,Mundo.TAMANO_MUNDO_ALTO);
 
         bitMapFont.draw(spriteBatch,"MARCADORES", 50, 450);
-        bitMapFont.draw(spriteBatch,vidasSalvadas, 50, 350);
-        bitMapFont.draw(spriteBatch, vidasMortas, 50, 350);
+        bitMapFont.draw(spriteBatch, vidasSalvadas, 50, 350);
+        //bitMapFont.draw(spriteBatch, vidasMortas, 50, 350);
 
         spriteBatch.end();
     }

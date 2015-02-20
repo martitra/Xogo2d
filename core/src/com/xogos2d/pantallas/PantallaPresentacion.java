@@ -67,7 +67,8 @@ public class PantallaPresentacion implements Screen, InputProcessor{
             // novo xogo
             meuXogoGame.setScreen(new PantallaXogo(meuXogoGame));
         } else if (Intersector.overlaps(dedo,botons[1])) {
-            // segunda opción, marcadores
+            //marcadores
+            meuXogoGame.setScreen(new PantallaMarcadores(meuXogoGame));
         } else if (Intersector.overlaps(dedo,botons[2])) {
             // salir
             Gdx.app.exit();
