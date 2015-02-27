@@ -3,7 +3,6 @@ package com.xogos2d.modelo;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.xogos2d.modelo.ElementoMobil.TIPOS_ELEMENTOS;
 
 public final class Mundo {
 	public static final int TAMANO_MUNDO_ANCHO = 300;
